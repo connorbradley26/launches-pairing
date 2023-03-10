@@ -1,25 +1,14 @@
 import Image from "next/image"
 import Link from "next/link"
+import ILaunch from "../types/ILaunch"
 
-const launches = [
-  {
-    name: 'Apollo 11',
-    date: new Date(),
-    core: 'Core 1',
-    payload: {
-        id: '1',
-        type: 'Satellite',
-    },
-    success: true,
-    imageUrl:
-      'https://robbreport.com/wp-content/uploads/2019/07/spacex-starship.jpg',
-  }
-]
 
-export default function Example() {
+
+export default function LaunchCard({launch}: { launch: ILaunch }) {
+    if (!launch) return (<div>Loading...</div>)
+
   return (
-    <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {launches.map((launch) => (
+   
         <li
           key={launch.name}
           className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white  shadow"
@@ -52,15 +41,12 @@ export default function Example() {
                 <Link
                   href={`#`}
                   className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-                >
-                  
+                >                  
                   More Details...
                 </Link>
               </div>
             </div>
           </div>
         </li>
-      ))}
-    </ul>
   )
 }
