@@ -1,13 +1,36 @@
 import { NextPageContext } from "next";
 import ILaunch from "@/types/ILaunch";
+import Image from "next/image";
 
 
 function Page({ launch }: { launch: ILaunch }) {
     
     return (
-        <>
-            {JSON.stringify(launch, null, 2)}
-        </>
+        <div className="prose mx-auto">
+            <div className="relative w-full h-64 ">
+                <Image fill className="object-contain" src={launch.imageUrl} alt={`Image of ${launch.name}`}/>
+            </div>
+            
+            <h1>{launch.name}</h1>
+            <div>
+            <p>Launch Date: {new Date(launch.date).toDateString()}</p>
+            <p>{launch.success ? "Success" : "Failed"}</p>
+            <blockquote>{launch.id}</blockquote>
+            </div>
+
+            <h2>Payload</h2>
+            
+            <p>Name: {launch.payload.name}</p>
+            <p>Type:{launch.payload.type}</p>
+            <blockquote>{launch.payload.id}</blockquote>
+
+            <h2>Core</h2>
+            
+            <p>Serial: {launch.core.serial}</p>
+            <blockquote>{launch.core.id}</blockquote>
+            
+
+        </div>
     )
 }
 
