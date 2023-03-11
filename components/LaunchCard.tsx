@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import ILaunch from "../types/ILaunch"
+import ILaunch from "@/types/ILaunch"
 
 
 
@@ -21,9 +21,8 @@ export default function LaunchCard({launch}: { launch: ILaunch }) {
             <dl className="mt-1 flex flex-grow flex-col justify-between">
                 <dt className="sr-only">Date</dt>
                 <dd className="text-sm text-gray-500">{new Date(launch.date).toDateString()}</dd>
-              {/* Hiding because it ugly */}
-              {/* <dd className="text-sm text-gray-500">{launch.core}</dd> */}
-              <dd className="text-sm text-gray-500">{launch.payload.type}</dd>
+              <dd className="text-sm text-gray-500">{launch.core?.serial}</dd>
+              <dd className="text-sm text-gray-500">{launch.payload?.type}</dd>
               <dd className="mt-3">
                 {launch.success ? (
                 <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800">

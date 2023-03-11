@@ -1,37 +1,18 @@
 
 
-import Header from '../components/Header';
-import LaunchCard from '../components/LaunchCard';
-import LaunchContainer from '../components/LaunchContainer';
-import ILaunch from '../types/ILaunch';
-import { IPayload } from '../types/IPayload';
+import Header from '@/components/Header';
+import LaunchContainer from '@/components/LaunchContainer';
+import ILaunch from '@/types/ILaunch';
 
 export async function getStaticProps() {
     const launchesResponse = await fetch(`${process.env.BASE_URL}/api/getLaunches`)
     const launches: ILaunch[] = await launchesResponse.json();
 
-    // if (!launches) {
-    //     // TODO: Handle error
-    //     throw new Error('Failed to fetch launches')
-    // }
-    // for (let launch of launches) {
-    //     const payloadResponse = await fetch(`${process.env.BASE_URL}/api/getPayload/${launch.payload.id}`)
-    //     const payload: IPayload = await payloadResponse.json();
-    //     if (!payload) {
-    //         // TODO: Handle error
-    //         throw new Error('Failed to fetch payload')
-    //     }
-
-    //     if (payload) {
-    //         launch.payload.type = payload.type;
-    //     }
-    // }
-
     return {
         props: {
             launches,
         },
-        revalidate: 1
+        revalidate: 60
     }
 }
 
