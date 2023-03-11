@@ -7,7 +7,7 @@ function Page({ launch }: { launch: ILaunch }) {
     
     return (
         <div className="prose mx-auto">
-            <div className="relative w-full h-64 ">
+            <div className="relative w-full h-64 my-10">
                 <Image fill className="object-contain" src={launch.imageUrl} alt={`Image of ${launch.name}`}/>
             </div>
             
@@ -40,6 +40,7 @@ Page.getInitialProps = async (ctx: NextPageContext) => {
     // If not, were running this in the browser so we don't need to use the BASE_URL env variable
     // req is only available on the server
     const url = `${ctx.req ? process.env.BASE_URL : ""}/api/getLaunch/${ctx.query.id}`
+    console.log(url)
     const launchResponse = await fetch(url)
     const launch: ILaunch = await launchResponse.json();
     if (!launch) return ctx.res?.writeHead(404).end();

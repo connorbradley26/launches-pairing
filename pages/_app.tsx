@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import '../styles/globals.css';
+import ErrorBoundary from '@/components/ErrorBoundary';
+
 
 function SpaceXApp({ Component, pageProps }: AppProps) {
   return (
@@ -13,7 +15,9 @@ function SpaceXApp({ Component, pageProps }: AppProps) {
 
       <div className="bg-gray-100">
         <div className="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 min-h-screen py-4 md:py-10">
-          <Component {...pageProps} />
+          <ErrorBoundary>
+            <Component {...pageProps} />
+          </ErrorBoundary>
         </div>
       </div>
     </>

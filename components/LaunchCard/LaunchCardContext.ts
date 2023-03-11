@@ -7,7 +7,6 @@ export function useLaunchCardContext() {
   const context = useContext(LaunchCardContext);
 
   if (!context) {
-    console.log('LaunchCardContext must be used within a LaunchCardContextProvider');
     throw new Error('LaunchCardContext must be used within a LaunchCardContextProvider');
   }
   return context;
