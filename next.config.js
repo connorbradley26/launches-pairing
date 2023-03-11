@@ -4,4 +4,7 @@ module.exports = {
   images: {
     domains: ['images2.imgbox.com'],
   },
+  env: {
+    BASE_URL: process.env.BASE_URL
+  }
 }

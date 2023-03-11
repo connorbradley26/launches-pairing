@@ -42,6 +42,7 @@ Page.getInitialProps = async (ctx: NextPageContext) => {
     const url = `${ctx.req ? process.env.BASE_URL : ""}/api/getLaunch/${ctx.query.id}`
     const launchResponse = await fetch(url)
     const launch: ILaunch = await launchResponse.json();
+    if (!launch) return ctx.res?.writeHead(404).end();
     return { launch: launch }
 }
 
