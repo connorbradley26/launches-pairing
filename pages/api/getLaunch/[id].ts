@@ -21,6 +21,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     body: JSON.stringify({
       query: {
         _id: id,
+        success: {
+          $in: [ true , false ]
+        }
       },
       options
     }),

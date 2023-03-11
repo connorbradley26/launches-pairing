@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.16",
     "eslint-plugin-prettier": "^4.2.1",
     "next": "^13.1.2",
     "prettier": "^2.6.2",

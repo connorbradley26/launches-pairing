@@ -5,7 +5,7 @@ export function getStandardOptionsData(limit: number) {
     },
     limit: limit,
     sort: {
-      date_utc: 'asc',
+      date_utc: 'desc',
     },
     select: ['links.patch.small', 'name', 'date_utc', 'success'],
     populate: [

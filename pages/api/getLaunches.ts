@@ -11,7 +11,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({options}),
+    body: JSON.stringify({
+      query: {
+        success: {
+          $in: [true, false],
+        },
+      },
+      options
+    }),
   });
 
   const launchesResponse: ILaunchesResponse = await response.json();
