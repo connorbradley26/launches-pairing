@@ -17,7 +17,7 @@ export interface ILaunchResponse {
   success: boolean;
   payloads: Payload[];
   name: string;
-  cores: CoreDetails[];
+  cores: Core[];
   id: string;
   date_utc: string;
 }
@@ -35,6 +35,11 @@ export interface Patch {
   small: string;
   large: string;
 }
+
+export interface Core {
+  core: CoreDetails;
+}
+
 export interface CoreDetails {
   serial: string;
   id: string;

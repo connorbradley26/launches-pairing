@@ -37,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     imageUrl: launchData.links.patch.small,
     name: launchData.name,
     date: new Date(launchData.date_utc),
-    core: launchData.cores[0],
+    core: launchData.cores[0].core,
     payload: launchData.payloads[0],
     success: launchData.success
   };

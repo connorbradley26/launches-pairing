@@ -1,5 +1,5 @@
 import ILaunch from "@/types/ILaunch";
-import LaunchCard from "@/components/LaunchCard";
+import LaunchCard from "@/components/LaunchCard/LaunchCard";
 
 
 export default function LaunchContainer({launches} : {launches: ILaunch[]}) {

@@ -1,4 +1,4 @@
-import { CoreDetails, Payload } from "./ILaunchResponse";
+import { Core, CoreDetails, Payload } from "./ILaunchResponse";
 
 export default interface ILaunch {
     id: string;
