@@ -1,6 +1,8 @@
-import { NextPageContext } from "next";
 import ILaunch from "@/types/ILaunch";
 import Image from "next/image";
+import getLaunchRequests from "@/lib/getLaunchRequest";
+import convertLaunchReqToILaunch from "@/lib/convertLaunchReqToILaunch";
+import { ILaunchResponse } from "@/types/ILaunchResponse";
 
 
 function Page({ launch }: { launch: ILaunch }) {
@@ -35,16 +37,29 @@ function Page({ launch }: { launch: ILaunch }) {
 }
 
 
-Page.getInitialProps = async (ctx: NextPageContext) => {
-    // If we're navigating here via next/link we are running this code on the client
-    // If not, were running this in the browser so we don't need to use the BASE_URL env variable
-    // req is only available on the server
-    const url = `${ctx.req ? process.env.BASE_URL : ""}/api/getLaunch/${ctx.query.id}`
-    console.log(url)
-    const launchResponse = await fetch(url)
-    const launch: ILaunch = await launchResponse.json();
-    if (!launch) return ctx.res?.writeHead(404).end();
-    return { launch: launch }
+export async function getStaticProps({ params }: { params: { id: string } }) {
+
+    const launchResponse = await getLaunchRequests(1, params.id);
+    if (launchResponse instanceof Error) return { notFound: true };
+    const launch: ILaunch = convertLaunchReqToILaunch(launchResponse.launches[0]);
+        
+
+    return {
+        props: { 
+            launch: launch 
+        },
+        revalidate: 60
+    }
+}
+
+export async function getStaticPaths() {
+    const launchesResponse = await getLaunchRequests(10);
+
+    if (launchesResponse instanceof Error) return { notFound: true };
+    const launches: ILaunchResponse[] = launchesResponse.launches;
+    const paths = launches.map(launch => ({ params: { id: launch.id } }))
+    console.log("paths", paths)
+    return { paths, fallback: 'blocking' }
 }
 
 
